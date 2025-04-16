@@ -1,0 +1,771 @@
+.marketplace-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.marketplace-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.marketplace-header h1 {
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+.marketplace-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search-box {
+  display: flex;
+  height: 38px;
+}
+
+.search-box input {
+  width: 250px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  font-size: 0.9rem;
+}
+
+.search-box button {
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  padding: 0 0.75rem;
+  cursor: pointer;
+}
+
+.sell-book-btn {
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.marketplace-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.marketplace-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Section headers */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.section-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.section-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.section-tabs button {
+  padding: 0.35rem 0.75rem;
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.section-tabs button.active {
+  background-color: #4361ee;
+  color: white;
+  border-color: #4361ee;
+}
+
+/* My Listings Section */
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.listing-card {
+  position: relative;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.listing-status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+}
+
+.listing-status.available {
+  background-color: #10b981;
+}
+
+.listing-status.reserved {
+  background-color: #f59e0b;
+}
+
+.listing-status.sold {
+  background-color: #6b7280;
+}
+
+.listing-image {
+  height: 150px;
+  background-color: #f2f2f2;
+}
+
+.listing-details {
+  padding: 1rem;
+}
+
+.listing-details h3 {
+  font-size: 1rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.book-author {
+  color: #666;
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.listing-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.book-condition {
+  font-size: 0.85rem;
+  color: #555;
+  background-color: #f2f2f2;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+}
+
+.listing-price {
+  font-weight: 600;
+  color: #4361ee;
+}
+
+.listing-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.reservation-info, .sale-info {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 0.5rem 0;
+}
+
+.reservation-date, .sale-date {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.listing-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: #f8f8f8;
+}
+
+.listing-actions button {
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.edit-listing-btn, .mark-sold-btn, .relist-btn {
+  background-color: #4361ee;
+  color: white;
+  border: none;
+}
+
+.remove-listing-btn, .cancel-reservation-btn {
+  background-color: white;
+  color: #555;
+  border: 1px solid #ddd;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.create-listing-btn, .browse-books-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Offers & Requests Section */
+.offers-requests-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.offers-list, .requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.offer-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.offer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: #f8f8f8;
+}
+
+.offer-header h4 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.offer-date {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.offer-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.offer-prices {
+  font-size: 0.9rem;
+}
+
+.original-price, .offer-price {
+  margin-bottom: 0.25rem;
+}
+
+.price-difference {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.offer-buyer {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.buyer-rating {
+  color: #f59e0b;
+}
+
+.offer-message {
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: #555;
+  background-color: #f8f8f8;
+  font-style: italic;
+}
+
+.offer-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.accept-offer-btn {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.counter-offer-btn {
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.decline-offer-btn {
+  background-color: white;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.request-card {
+  display: flex;
+  gap: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.request-image {
+  width: 80px;
+  height: 100px;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+
+.request-details {
+  flex: 1;
+}
+
+.request-details h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+}
+
+.request-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin: 0.5rem 0;
+}
+
+.request-price {
+  font-weight: 600;
+  color: #4361ee;
+}
+
+.request-status {
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  color: white;
+  margin-right: 0.5rem;
+}
+
+.status-badge.accepted {
+  background-color: #10b981;
+}
+
+.status-badge.pending {
+  background-color: #f59e0b;
+}
+
+.next-step {
+  color: #555;
+}
+
+.request-date {
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+.request-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.message-seller-btn, .arrange-pickup-btn {
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.cancel-request-btn {
+  background-color: white;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Marketplace Spotlight Section */
+.recommended-books, .hot-deals {
+  margin-bottom: 2rem;
+}
+
+.book-recommendations {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.recommended-book-card {
+  display: flex;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.book-image {
+  width: 80px;
+  height: 120px;
+  background-color: #f2f2f2;
+}
+
+.book-details {
+  flex: 1;
+  padding: 0.75rem;
+}
+
+.match-reason {
+  font-size: 0.75rem;
+  color: white;
+  background-color: #4361ee;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.book-title {
+  font-size: 0.95rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.book-meta {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+}
+
+.book-price {
+  font-weight: 600;
+  color: #4361ee;
+}
+
+.seller-info {
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.seller-rating {
+  color: #f59e0b;
+  margin-left: 0.5rem;
+}
+
+.book-location {
+  font-size: 0.8rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.posted-date {
+  margin-left: auto;
+}
+
+.book-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background-color: #f8f8f8;
+}
+
+.view-book-btn {
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.save-book-btn {
+  background-color: white;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.deals-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.deal-card {
+  position: relative;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ef4444;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.deal-image {
+  height: 120px;
+  background-color: #f2f2f2;
+}
+
+.deal-details {
+  padding: 0.75rem;
+}
+
+.price-comparison {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.sale-price {
+  font-weight: 600;
+  color: #ef4444;
+  font-size: 1rem;
+}
+
+.deal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.deal-actions {
+  padding: 0.75rem;
+  background-color: #f8f8f8;
+}
+
+.view-deal-btn {
+  width: 100%;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Transaction Summary Section */
+.financial-summary {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-card {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.summary-card.earnings {
+  background-color: #ecfdf5;
+  border: 1px solid #d1fae5;
+}
+
+.summary-card.spending {
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+}
+
+.summary-card.balance {
+  background-color: #f8fafc;
+  border: 1px solid #f1f5f9;
+}
+
+.summary-label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.summary-amount {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.summary-card.earnings .summary-amount {
+  color: #10b981;
+}
+
+.summary-card.spending .summary-amount {
+  color: #4361ee;
+}
+
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.transaction-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+}
+
+.transaction-item.sold {
+  border-left: 3px solid #10b981;
+}
+
+.transaction-item.purchase {
+  border-left: 3px solid #4361ee;
+}
+
+.transaction-icon {
+  font-size: 1.25rem;
+}
+
+.transaction-details {
+  flex: 1;
+}
+
+.transaction-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.transaction-title {
+  font-weight: 500;
+}
+
+.transaction-amount {
+  font-weight: 600;
+}
+
+.transaction-item.sold .transaction-amount {
+  color: #10b981;
+}
+
+.transaction-item.purchase .transaction-amount {
+  color: #4361ee;
+}
+
+.transaction-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.transaction-status {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.view-all-transactions {
+  width: 100%;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .marketplace-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .offers-requests-container {
+    grid-template-columns: 1fr;
+  }
+} 
