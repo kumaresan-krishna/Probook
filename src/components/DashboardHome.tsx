@@ -1,313 +1,446 @@
-import React, { useState } from 'react';
-import '../styles/DashboardHome.css';
+import React from 'react';
+import {
+  Box, Flex, Grid, Heading, Text, Stat, StatLabel, 
+  StatNumber, StatHelpText, StatArrow, SimpleGrid,
+  Progress, Icon, useColorModeValue
+} from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import {
+  BookOpen, BookmarkSimple, Books, Trophy,
+  ClockClockwise, TrendUp, Calendar
+} from 'phosphor-react';
+
+const MotionBox = motion(Box);
+const MotionFlex = motion(Flex);
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: { 
+      when: "beforeChildren", 
+      staggerChildren: 0.1 
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3 } }
+};
 
 const DashboardHome: React.FC = () => {
-  const [activeCarouselItem, setActiveCarouselItem] = useState(0);
-  
-  // Mock data for summary cards
-  const summaryData = {
+  const bgColor = useColorModeValue('neutral.50', 'gray.900');
+  const cardBg = useColorModeValue('white', 'gray.800');
+  const borderColor = useColorModeValue('gray.100', 'gray.700');
+  const textColor = useColorModeValue('gray.800', 'white');
+  const mutedColor = useColorModeValue('gray.600', 'gray.400');
+
+  // Mock data (this would come from your API or state)
+  const stats = {
     booksRead: 28,
+    streak: 15,
     clubsJoined: 5,
-    activeListings: 3,
+    readingTime: 9.5,
     readingGoal: { current: 28, target: 50 }
   };
-  
-  // Mock data for reading segments
-  const segments = [
+
+  const currentlyReading = [
     {
       id: 1,
-      title: "Currently Reading",
-      books: 4,
+      title: "The Midnight Library",
+      author: "Matt Haig",
+      cover: "https://images-na.ssl-images-amazon.com/images/I/81YzHKeWq7L.jpg",
       progress: 65,
-      coverColor: "#4361ee"
+      currentPage: 195,
+      totalPages: 304,
+      estimatedCompletion: "May 28"
     },
     {
       id: 2,
-      title: "Fantasy Collection",
-      books: 12,
-      progress: 100,
-      coverColor: "#3a0ca3"
-    },
-    {
-      id: 3,
-      title: "Business Books",
-      books: 8,
-      progress: 25,
-      coverColor: "#4cc9f0"
-    },
-    {
-      id: 4,
-      title: "Summer Reading",
-      books: 6,
-      progress: 50,
-      coverColor: "#f72585"
-    },
-    {
-      id: 5,
-      title: "Classics",
-      books: 15,
-      progress: 40,
-      coverColor: "#fb8500"
+      title: "Project Hail Mary",
+      author: "Andy Weir",
+      cover: "https://images-na.ssl-images-amazon.com/images/I/91Bd7P8UwxL.jpg",
+      progress: 23,
+      currentPage: 82,
+      totalPages: 496,
+      estimatedCompletion: "June 12"
     }
   ];
-  
-  // Mock data for activity feed
-  const activities = [
+
+  const recentActivity = [
     {
       id: 1,
-      type: "book_progress",
-      title: "Updated progress on Project Hail Mary",
-      details: "75% complete",
-      time: "2 hours ago",
-      icon: "📖"
+      type: "completion",
+      title: "The Psychology of Money",
+      author: "Morgan Housel",
+      date: "2 days ago",
+      cover: "https://images-na.ssl-images-amazon.com/images/I/81Lb75rUhLL.jpg",
     },
     {
       id: 2,
-      type: "club_post",
-      title: "New post in Fantasy Readers club",
-      details: "Sarah Johnson posted 'Thoughts on The Name of the Wind'",
-      time: "Yesterday",
-      icon: "👥"
+      type: "milestone",
+      title: "Project Hail Mary",
+      author: "Andy Weir",
+      milestone: "25%",
+      date: "3 days ago",
+      cover: "https://images-na.ssl-images-amazon.com/images/I/91Bd7P8UwxL.jpg"
     },
     {
       id: 3,
-      type: "new_book",
-      title: "Added The Lincoln Highway to your library",
-      details: "Added to 'Want to Read' list",
-      time: "2 days ago",
-      icon: "📚"
-    },
-    {
-      id: 4,
-      type: "club_event",
-      title: "Upcoming event in Science Fiction club",
-      details: "Author Q&A: Andy Weir - Tomorrow at 7:00 PM",
-      time: "2 days ago",
-      icon: "📅"
+      type: "started",
+      title: "The Midnight Library",
+      author: "Matt Haig",
+      date: "5 days ago",
+      cover: "https://images-na.ssl-images-amazon.com/images/I/81YzHKeWq7L.jpg"
     }
   ];
+
+  return (
+    <MotionBox
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      maxW="1200px"
+      mx="auto"
+      pb={8}
+    >
+      {/* Dashboard Header */}
+      <MotionFlex 
+        variants={itemVariants}
+        justify="space-between" 
+        align="center" 
+        mb={8}
+      >
+        <Heading size="xl" fontWeight="extrabold">Dashboard</Heading>
+        <Box>
+          <Text color={mutedColor} fontWeight="medium">
+            {new Date().toLocaleDateString('en-US', { 
+              weekday: 'long', 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            })}
+          </Text>
+        </Box>
+      </MotionFlex>
+
+      {/* Stats Overview */}
+      <MotionBox variants={itemVariants} mb={8}>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={5}>
+          <StatCard
+            label="Books Read"
+            value={stats.booksRead}
+            icon={Books}
+            iconColor="brand.400"
+            increase={8}
+            helpText="vs. last month"
+          />
+          
+          <StatCard
+            label="Reading Streak"
+            value={`${stats.streak} days`}
+            icon={TrendUp}
+            iconColor="green.500"
+            increase={5}
+            helpText="consecutive days"
+          />
+          
+          <StatCard
+            label="Reading Time"
+            value={`${stats.readingTime}h`}
+            icon={ClockClockwise}
+            iconColor="purple.500"
+            increase={-12}
+            helpText="vs. last week"
+          />
+          
+          <StatCard
+            label="Reading Goal"
+            value={`${stats.readingGoal.current}/${stats.readingGoal.target}`}
+            icon={Trophy}
+            iconColor="orange.500"
+            increase={15}
+            helpText="books this year"
+            showProgress
+            progress={(stats.readingGoal.current / stats.readingGoal.target) * 100}
+          />
+        </SimpleGrid>
+      </MotionBox>
+
+      {/* Currently Reading */}
+      <MotionBox variants={itemVariants} mb={8}>
+        <Flex justify="space-between" align="center" mb={4}>
+          <Heading size="md">Currently Reading</Heading>
+          <Text color="brand.500" fontWeight="medium" fontSize="sm" cursor="pointer">
+            View All
+          </Text>
+        </Flex>
+        
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
+          {currentlyReading.map(book => (
+            <ReadingBookCard key={book.id} book={book} />
+          ))}
+        </SimpleGrid>
+      </MotionBox>
+
+      {/* Recent Activity */}
+      <MotionBox variants={itemVariants}>
+        <Heading size="md" mb={4}>Recent Activity</Heading>
+        
+        <Box
+          borderRadius="xl"
+          bg={cardBg}
+          boxShadow="sm"
+          overflow="hidden"
+        >
+          {recentActivity.map((activity, index) => (
+            <ActivityItem 
+              key={activity.id} 
+              activity={activity} 
+              isLast={index === recentActivity.length - 1} 
+            />
+          ))}
+        </Box>
+      </MotionBox>
+    </MotionBox>
+  );
+};
+
+// Stat Card Component
+interface StatCardProps {
+  label: string;
+  value: string | number;
+  icon: React.ComponentType;
+  iconColor: string;
+  increase: number;
+  helpText: string;
+  showProgress?: boolean;
+  progress?: number;
+}
+
+const StatCard: React.FC<StatCardProps> = ({
+  label,
+  value,
+  icon,
+  iconColor,
+  increase,
+  helpText,
+  showProgress = false,
+  progress = 0
+}) => {
+  const cardBg = useColorModeValue('white', 'gray.800');
   
-  // Navigate carousel
-  const nextCarouselItem = () => {
-    setActiveCarouselItem((prev) => 
-      prev === segments.length - 1 ? 0 : prev + 1
-    );
+  return (
+    <Box
+      bg={cardBg}
+      p={5}
+      borderRadius="xl"
+      boxShadow="sm"
+      position="relative"
+      overflow="hidden"
+    >
+      <Flex justify="space-between" align="flex-start">
+        <Stat>
+          <StatLabel color="gray.500" fontSize="sm" fontWeight="medium">{label}</StatLabel>
+          <StatNumber fontSize="2xl" fontWeight="bold" my={1}>{value}</StatNumber>
+          <StatHelpText mb={0}>
+            <StatArrow type={increase >= 0 ? 'increase' : 'decrease'} />
+            {Math.abs(increase)}% {helpText}
+          </StatHelpText>
+        </Stat>
+        
+        <Flex
+          w="40px"
+          h="40px"
+          justify="center"
+          align="center"
+          borderRadius="lg"
+          bg={`${iconColor}15`}
+          color={iconColor}
+        >
+          <Icon as={icon} boxSize={5} />
+        </Flex>
+      </Flex>
+      
+      {showProgress && (
+        <Box mt={4}>
+          <Progress 
+            value={progress} 
+            size="sm" 
+            colorScheme="brand" 
+            borderRadius="full"
+            hasStripe={progress < 100}
+            isAnimated={progress < 100}
+          />
+        </Box>
+      )}
+      
+      {/* Decorative element */}
+      <Box
+        position="absolute"
+        bottom={-12}
+        right={-12}
+        width="80px"
+        height="80px"
+        borderRadius="full"
+        bg={`${iconColor}05`}
+        zIndex={0}
+      />
+    </Box>
+  );
+};
+
+// Reading Book Card Component
+interface ReadingBookProps {
+  book: {
+    id: number;
+    title: string;
+    author: string;
+    cover: string;
+    progress: number;
+    currentPage: number;
+    totalPages: number;
+    estimatedCompletion: string;
   };
+}
+
+const ReadingBookCard: React.FC<ReadingBookProps> = ({ book }) => {
+  const cardBg = useColorModeValue('white', 'gray.800');
+  const mutedColor = useColorModeValue('gray.600', 'gray.400');
   
-  const prevCarouselItem = () => {
-    setActiveCarouselItem((prev) => 
-      prev === 0 ? segments.length - 1 : prev - 1
-    );
+  return (
+    <Box
+      bg={cardBg}
+      borderRadius="xl"
+      overflow="hidden"
+      boxShadow="sm"
+      transition="all 0.2s"
+      _hover={{ transform: 'translateY(-4px)', boxShadow: 'md' }}
+    >
+      <Flex>
+        <Box
+          width="100px"
+          height="150px"
+          bgImage={`url(${book.cover})`}
+          bgSize="cover"
+          bgPosition="center"
+        />
+        
+        <Box p={4} flex="1">
+          <Heading size="sm" mb={1}>{book.title}</Heading>
+          <Text fontSize="sm" color={mutedColor} mb={3}>{book.author}</Text>
+          
+          <Flex align="center" fontSize="xs" color={mutedColor} mb={2}>
+            <Icon as={BookOpen} mr={1} />
+            <Text>{book.currentPage} of {book.totalPages} pages</Text>
+          </Flex>
+          
+          <Flex align="center" fontSize="xs" color={mutedColor} mb={3}>
+            <Icon as={Calendar} mr={1} />
+            <Text>Est. completion: {book.estimatedCompletion}</Text>
+          </Flex>
+          
+          <Box>
+            <Flex justify="space-between" mb={1}>
+              <Text fontSize="xs" fontWeight="medium">Progress</Text>
+              <Text fontSize="xs" fontWeight="bold">{book.progress}%</Text>
+            </Flex>
+            <Progress 
+              value={book.progress} 
+              size="sm" 
+              colorScheme="brand" 
+              borderRadius="full" 
+            />
+          </Box>
+        </Box>
+      </Flex>
+    </Box>
+  );
+};
+
+// Activity Item Component
+interface ActivityItemProps {
+  activity: {
+    id: number;
+    type: string;
+    title: string;
+    author: string;
+    date: string;
+    milestone?: string;
+    cover: string;
   };
+  isLast: boolean;
+}
+
+const ActivityItem: React.FC<ActivityItemProps> = ({ activity, isLast }) => {
+  const borderColor = useColorModeValue('gray.100', 'gray.700');
+  const mutedColor = useColorModeValue('gray.600', 'gray.400');
   
-  // Calculate visible carousel items
-  const getVisibleSegments = () => {
-    const segmentsArray = [...segments];
-    const visibleCount = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-    
-    // Reorder array to show active item and next items, with wrap-around
-    const reordered = [];
-    for (let i = 0; i < visibleCount; i++) {
-      const index = (activeCarouselItem + i) % segments.length;
-      reordered.push(segmentsArray[index]);
+  // Get icon based on activity type
+  const getActivityIcon = () => {
+    switch(activity.type) {
+      case 'completion': return BookmarkSimple;
+      case 'milestone': return Books;
+      case 'started': return BookOpen;
+      default: return BookOpen;
     }
-    
-    return reordered;
+  };
+  
+  // Get background color based on activity type
+  const getActivityColor = () => {
+    switch(activity.type) {
+      case 'completion': return 'green.500';
+      case 'milestone': return 'brand.400';
+      case 'started': return 'purple.500';
+      default: return 'gray.500';
+    }
+  };
+  
+  // Get activity description
+  const getActivityDesc = () => {
+    switch(activity.type) {
+      case 'completion': return 'Completed';
+      case 'milestone': return `Reached ${activity.milestone}`;
+      case 'started': return 'Started reading';
+      default: return 'Updated';
+    }
   };
   
   return (
-    <div className="dashboard-home">
-      <h1 className="dashboard-title">Dashboard</h1>
+    <Flex
+      p={4}
+      borderBottomWidth={isLast ? '0' : '1px'}
+      borderColor={borderColor}
+      align="center"
+      _hover={{ bg: useColorModeValue('gray.50', 'gray.750') }}
+    >
+      <Flex
+        w="40px"
+        h="40px"
+        align="center"
+        justify="center"
+        borderRadius="full"
+        bg={`${getActivityColor()}15`}
+        color={getActivityColor()}
+        mr={4}
+        flexShrink={0}
+      >
+        <Icon as={getActivityIcon()} boxSize={5} />
+      </Flex>
       
-      {/* Summary Cards Section */}
-      <section className="summary-cards">
-        <div className="summary-card">
-          <div className="summary-icon book-icon">📚</div>
-          <div className="summary-content">
-            <h2>{summaryData.booksRead}</h2>
-            <p>Books Read</p>
-          </div>
-          <div className="summary-progress">
-            <div className="progress-ring">
-              <svg width="60" height="60">
-                <circle
-                  className="progress-ring-circle-bg"
-                  stroke="#e2e8f0"
-                  strokeWidth="4"
-                  fill="transparent"
-                  r="25"
-                  cx="30"
-                  cy="30"
-                />
-                <circle
-                  className="progress-ring-circle"
-                  stroke="#4361ee"
-                  strokeWidth="4"
-                  fill="transparent"
-                  r="25"
-                  cx="30"
-                  cy="30"
-                  style={{
-                    strokeDasharray: `${2 * Math.PI * 25}`,
-                    strokeDashoffset: `${2 * Math.PI * 25 * (1 - summaryData.readingGoal.current / summaryData.readingGoal.target)}`
-                  }}
-                />
-                <text x="30" y="35" textAnchor="middle" className="progress-text">
-                  {Math.round(summaryData.readingGoal.current / summaryData.readingGoal.target * 100)}%
-                </text>
-              </svg>
-            </div>
-            <span className="goal-text">{summaryData.readingGoal.current}/{summaryData.readingGoal.target} Goal</span>
-          </div>
-        </div>
-        
-        <div className="summary-card">
-          <div className="summary-icon club-icon">👥</div>
-          <div className="summary-content">
-            <h2>{summaryData.clubsJoined}</h2>
-            <p>Clubs Joined</p>
-          </div>
-          <button className="summary-action">View Clubs</button>
-        </div>
-        
-        <div className="summary-card">
-          <div className="summary-icon listing-icon">🛒</div>
-          <div className="summary-content">
-            <h2>{summaryData.activeListings}</h2>
-            <p>Active Listings</p>
-          </div>
-          <button className="summary-action">View Listings</button>
-        </div>
-      </section>
+      <Box flex="1">
+        <Text fontWeight="medium">{getActivityDesc()}</Text>
+        <Text fontSize="sm" color={mutedColor}>
+          {activity.title} by {activity.author}
+        </Text>
+      </Box>
       
-      {/* Segments Carousel */}
-      <section className="segments-section">
-        <div className="section-header">
-          <h2>My Segments</h2>
-          <div className="carousel-controls">
-            <button className="carousel-control prev" onClick={prevCarouselItem}>
-              &#10094;
-            </button>
-            <button className="carousel-control next" onClick={nextCarouselItem}>
-              &#10095;
-            </button>
-          </div>
-        </div>
-        
-        <div className="segments-carousel">
-          {getVisibleSegments().map(segment => (
-            <div className="segment-card" key={segment.id}>
-              <div 
-                className="segment-cover" 
-                style={{ backgroundColor: segment.coverColor }}
-              ></div>
-              <div className="segment-details">
-                <h3>{segment.title}</h3>
-                <p>{segment.books} Books</p>
-                <div className="segment-progress-bar">
-                  <div 
-                    className="segment-progress-fill" 
-                    style={{ width: `${segment.progress}%` }}
-                  ></div>
-                </div>
-                <div className="segment-progress-text">
-                  {segment.progress === 100 ? 'Complete' : `${segment.progress}% Complete`}
-                </div>
-              </div>
-              <button className="segment-action">View</button>
-            </div>
-          ))}
-          
-          <div className="segment-card add-segment">
-            <div className="add-segment-content">
-              <span className="add-icon">+</span>
-              <p>Create New Segment</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Main Dashboard Grid */}
-      <div className="dashboard-grid">
-        {/* Activity Feed */}
-        <section className="activity-feed-section">
-          <div className="section-header">
-            <h2>Latest Activity</h2>
-            <button className="view-all-btn">View All</button>
-          </div>
-          
-          <div className="activity-list">
-            {activities.map(activity => (
-              <div className="activity-item" key={activity.id}>
-                <div className={`activity-icon ${activity.type}`}>
-                  {activity.icon}
-                </div>
-                <div className="activity-content">
-                  <h3>{activity.title}</h3>
-                  <p>{activity.details}</p>
-                  <span className="activity-time">{activity.time}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-        
-        {/* Features Teasers */}
-        <div className="features-section">
-          <div className="feature-teaser bookbot-teaser">
-            <div className="teaser-icon">🤖</div>
-            <div className="teaser-content">
-              <h3>AI Book Bot</h3>
-              <p>Not sure what to read next? Ask Book Bot for personalized recommendations.</p>
-              <div className="teaser-input-container">
-                <input 
-                  type="text" 
-                  placeholder="Ask what to read next..." 
-                  className="teaser-input"
-                />
-                <button className="teaser-button">Ask</button>
-              </div>
-            </div>
-          </div>
-          
-          <div className="feature-teaser writer-teaser">
-            <div className="teaser-icon">✍️</div>
-            <div className="teaser-content">
-              <h3>Writer.ai</h3>
-              <p>Ready to start your writing journey? Writer.ai helps you create, edit, and enhance your stories.</p>
-              <button className="teaser-action">Start Writing Today</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Quick Actions */}
-      <section className="quick-actions-section">
-        <h2>Quick Actions</h2>
-        <div className="quick-actions">
-          <button className="quick-action-btn">
-            <span className="quick-action-icon">📕</span>
-            Add Book
-          </button>
-          <button className="quick-action-btn">
-            <span className="quick-action-icon">📋</span>
-            Create Segment
-          </button>
-          <button className="quick-action-btn">
-            <span className="quick-action-icon">👥</span>
-            Join Club
-          </button>
-          <button className="quick-action-btn">
-            <span className="quick-action-icon">🛒</span>
-            Sell Book
-          </button>
-          <button className="quick-action-btn">
-            <span className="quick-action-icon">📊</span>
-            Set Reading Goal
-          </button>
-        </div>
-      </section>
-    </div>
+      <Text fontSize="xs" color={mutedColor}>
+        {activity.date}
+      </Text>
+    </Flex>
   );
 };
 

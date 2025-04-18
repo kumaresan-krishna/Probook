@@ -1028,4 +1028,230 @@ section h2 {
     padding: 1.5rem;
     max-width: 90%;
   }
+}
+
+/* Add styles for the share button */
+.share-books-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6d4c41;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  margin-right: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.share-books-btn:hover {
+  background-color: #5d4037;
+}
+
+.share-books-btn i {
+  margin-right: 6px;
+}
+
+/* Selection mode styling */
+.selection-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.selection-count {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.create-image-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.create-image-btn:disabled {
+  background-color: #a5d6a7;
+  cursor: not-allowed;
+}
+
+.create-image-btn:hover:not(:disabled) {
+  background-color: #43a047;
+}
+
+.selection-instruction {
+  background-color: #e8f5e9;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.selection-instruction p {
+  margin: 0;
+  color: #2e7d32;
+  font-size: 0.9rem;
+}
+
+.books-grid.selection-mode {
+  opacity: 0.95;
+}
+
+.book-card-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.book-card-wrapper.selectable {
+  cursor: pointer;
+}
+
+.book-card-wrapper.selectable:hover {
+  transform: translateY(-3px);
+  transition: transform 0.2s ease;
+}
+
+.book-card-wrapper.selected {
+  outline: 3px solid #4caf50;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+
+.selection-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.selection-checkbox input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #4caf50;
+}
+
+/* Bookshelves Tab */
+.status-tabs .bookshelves-tab {
+  background-color: #f5f3ff;
+  color: #6d28d9;
+  border-bottom: 3px solid transparent;
+}
+
+.status-tabs .bookshelves-tab:hover {
+  background-color: #ede9fe;
+}
+
+/* Library with Bookshelves Layout */
+.library-with-bookshelves {
+  display: flex;
+  min-height: calc(100vh - 250px);
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.bookshelves-sidebar {
+  width: 320px;
+  border-right: 1px solid #eee;
+  background-color: #fafafa;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.books-display {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.shelf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.shelf-header h2 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #333;
+}
+
+.back-button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.back-button:hover {
+  background-color: #e0e0e0;
+}
+
+.empty-shelf {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.empty-shelf p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.select-prompt {
+  text-align: center;
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.select-prompt h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 24px;
+}
+
+.select-prompt p {
+  color: #666;
+  margin: 15px 0;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+/* Responsive styles for bookshelves */
+@media (max-width: 768px) {
+  .library-with-bookshelves {
+    flex-direction: column;
+  }
+  
+  .bookshelves-sidebar {
+    width: 100%;
+    max-height: 300px;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
 } 

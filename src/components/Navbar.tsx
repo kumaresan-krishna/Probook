@@ -1,151 +1,120 @@
-import React, { useState } from 'react';
-import { supabase } from '../lib/supabase';
-import '../styles/Navbar.css';
+import React from 'react';
+import { 
+  Box, Flex, IconButton, Input, InputGroup, InputLeftElement, 
+  HStack, Avatar, Menu, MenuButton, MenuList, MenuItem,
+  useColorModeValue, Heading, useBreakpointValue
+} from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import { 
+  MagnifyingGlass, Bell, UserCircle, SignOut, Gear,
+  List
+} from 'phosphor-react';
 
-const Navbar: React.FC = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState<boolean>(false);
+const MotionFlex = motion(Flex);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-    if (isNotificationsOpen) setIsNotificationsOpen(false);
-  };
+interface NavbarProps {
+  onToggleSidebar: () => void;
+}
 
-  const toggleNotifications = () => {
-    setIsNotificationsOpen(!isNotificationsOpen);
-    if (isDropdownOpen) setIsDropdownOpen(false);
-  };
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-  };
-
+const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
+  const bgColor = useColorModeValue('white', 'neutral.800');
+  const borderColor = useColorModeValue('neutral.200', 'neutral.700');
+  const showSearch = useBreakpointValue({ base: false, md: true });
+  
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        {/* Left - Logo and App Name */}
-        <div className="navbar-brand">
-          <div className="app-logo">P</div>
-          <span className="app-name">Prebook</span>
-        </div>
-
-        {/* Center - Search Bar */}
-        <div className="navbar-search">
-          <input 
-            type="text" 
-            placeholder="Search books, clubs, users..." 
-            className="search-input"
+    <Flex
+      as="header"
+      align="center"
+      justify="space-between"
+      w="100%"
+      px={4}
+      py={3}
+      bg={bgColor}
+      borderBottomWidth="1px"
+      borderColor={borderColor}
+      boxShadow="sm"
+    >
+      <HStack spacing={4}>
+        <IconButton
+          display={{ base: 'flex', lg: 'none' }}
+          onClick={onToggleSidebar}
+          variant="ghost"
+          aria-label="Toggle navigation"
+          icon={<List weight="bold" size={24} />}
+        />
+        
+        <Heading 
+          size="md" 
+          fontWeight="black" 
+          bgGradient="linear(to-r, brand.400, brand.600)"
+          bgClip="text"
+        >
+          BOOKLE
+        </Heading>
+      </HStack>
+      
+      {showSearch && (
+        <InputGroup maxW="400px" mx={{ base: 0, lg: 8 }}>
+          <InputLeftElement pointerEvents="none">
+            <MagnifyingGlass weight="bold" />
+          </InputLeftElement>
+          <Input 
+            placeholder="Search books, authors, or topics..." 
+            borderRadius="full"
+            bg="neutral.100"
           />
-          <button className="search-button">
-            <span>🔍</span>
-          </button>
-        </div>
-
-        {/* Right - Notifications and Profile */}
-        <div className="navbar-actions">
-          <div className="notification-container">
-            <button 
-              className="notification-bell"
-              onClick={toggleNotifications}
-            >
-              <span>🔔</span>
-              <span className="notification-badge">3</span>
-            </button>
-            
-            {isNotificationsOpen && (
-              <div className="notifications-dropdown">
-                <div className="dropdown-header">
-                  <h3>Notifications</h3>
-                  <button className="mark-all-read">Mark all as read</button>
-                </div>
-                <div className="notification-list">
-                  <div className="notification-item unread">
-                    <div className="notification-avatar"></div>
-                    <div className="notification-content">
-                      <p>
-                        <strong>Sarah Johnson</strong> commented on your post about "The Psychology of Money"
-                      </p>
-                      <span className="notification-time">2 hours ago</span>
-                    </div>
-                    <div className="unread-marker"></div>
-                  </div>
-                  <div className="notification-item unread">
-                    <div className="notification-avatar"></div>
-                    <div className="notification-content">
-                      <p>
-                        <strong>Fantasy Readers</strong> club has a new event: "Author Q&A: Brandon Sanderson"
-                      </p>
-                      <span className="notification-time">Yesterday</span>
-                    </div>
-                    <div className="unread-marker"></div>
-                  </div>
-                  <div className="notification-item">
-                    <div className="notification-avatar"></div>
-                    <div className="notification-content">
-                      <p>
-                        <strong>Book Exchange Group</strong> approved your offer for "The Silent Patient"
-                      </p>
-                      <span className="notification-time">2 days ago</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="dropdown-footer">
-                  <button className="view-all-button">View all notifications</button>
-                </div>
-              </div>
-            )}
-          </div>
-          
-          <div className="profile-container">
-            <button 
-              className="profile-button"
-              onClick={toggleDropdown}
-            >
-              <div className="avatar"></div>
-            </button>
-            
-            {isDropdownOpen && (
-              <div className="profile-dropdown">
-                <div className="dropdown-user-info">
-                  <div className="dropdown-avatar"></div>
-                  <div className="dropdown-name">
-                    <h4>John Doe</h4>
-                    <p>john.doe@example.com</p>
-                  </div>
-                </div>
-                
-                <ul className="dropdown-menu">
-                  <li className="dropdown-item">
-                    <span className="dropdown-icon">👤</span>
-                    <span>Profile</span>
-                  </li>
-                  <li className="dropdown-item">
-                    <span className="dropdown-icon">⚙️</span>
-                    <span>Settings</span>
-                  </li>
-                  <li className="dropdown-item">
-                    <span className="dropdown-icon">📚</span>
-                    <span>My Library</span>
-                  </li>
-                  <li className="dropdown-item">
-                    <span className="dropdown-icon">👥</span>
-                    <span>My Clubs</span>
-                  </li>
-                  <li className="dropdown-divider"></li>
-                  <li 
-                    className="dropdown-item logout-item"
-                    onClick={handleLogout}
-                  >
-                    <span className="dropdown-icon">🚪</span>
-                    <span>Logout</span>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </nav>
+        </InputGroup>
+      )}
+      
+      <HStack spacing={3}>
+        <MotionFlex
+          justify="center"
+          align="center"
+          position="relative"
+          p={2}
+          borderRadius="full"
+          cursor="pointer"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Bell weight="fill" size={22} />
+          <Box
+            position="absolute"
+            top={1}
+            right={1}
+            w={2}
+            h={2}
+            bg="accent.500"
+            borderRadius="full"
+          />
+        </MotionFlex>
+        
+        <Menu>
+          <MenuButton
+            as={Avatar}
+            size="sm"
+            cursor="pointer"
+            src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
+            _hover={{ 
+              transform: 'scale(1.05)',
+              boxShadow: 'md'
+            }}
+            transition="all 0.2s"
+          />
+          <MenuList shadow="lg" p={1}>
+            <MenuItem icon={<UserCircle weight="fill" size={18} />}>
+              Profile
+            </MenuItem>
+            <MenuItem icon={<Gear weight="fill" size={18} />}>
+              Settings
+            </MenuItem>
+            <MenuItem icon={<SignOut weight="fill" size={18} />} color="red.500">
+              Sign out
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </HStack>
+    </Flex>
   );
 };
 

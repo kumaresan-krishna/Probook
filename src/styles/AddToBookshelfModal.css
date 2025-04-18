@@ -1,0 +1,267 @@
+.bookshelf-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.bookshelf-modal {
+  background-color: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bookshelf-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.bookshelf-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.bookshelf-modal-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 0;
+  color: #666;
+}
+
+.add-to-all-option {
+  background-color: #f8f9fa;
+  padding: 12px 16px;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 12px;
+}
+
+.add-to-all-option .checkbox-label {
+  font-weight: 500;
+}
+
+.add-to-all-option .shelf-emoji {
+  color: #4a6fa5;
+}
+
+.bookshelf-divider {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin-bottom: 12px;
+}
+
+.bookshelves-list {
+  margin-bottom: 24px;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.bookshelf-option {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.bookshelf-option:last-child {
+  border-bottom: none;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-right: 12px;
+  width: 18px;
+  height: 18px;
+}
+
+.shelf-emoji {
+  font-size: 1.5rem;
+  margin-right: 12px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.shelf-name {
+  font-size: 16px;
+  color: #333;
+}
+
+.create-shelf-btn {
+  background-color: transparent;
+  border: 1px dashed #4a6fa5;
+  color: #4a6fa5;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 20px;
+}
+
+.create-shelf-btn:hover {
+  background-color: #f0f7ff;
+}
+
+.create-shelf-form {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.cancel-form-btn {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  color: #666;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-form-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.save-shelf-btn {
+  background-color: #4a6fa5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-shelf-btn:hover {
+  background-color: #3a5a8c;
+}
+
+.save-shelf-btn:disabled {
+  background-color: #b0c4de;
+  cursor: not-allowed;
+}
+
+.modal-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.done-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.done-btn:hover {
+  background-color: #43a047;
+}
+
+@media (max-width: 600px) {
+  .bookshelf-modal {
+    width: 95%;
+    max-height: 80vh;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .cancel-form-btn, .save-shelf-btn {
+    width: 100%;
+  }
+} 

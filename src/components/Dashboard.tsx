@@ -443,7 +443,7 @@ const Dashboard: React.FC = () => {
         return (
           <div className="feature-content bookbot-content">
             <div className="feature-header">
-              <h2>AI Book Bot</h2>
+              <h2>Bri - Bibliophile Reader Interface</h2>
             </div>
             <div className="chat-container">
               <div className="chat-history">
@@ -453,7 +453,7 @@ const Dashboard: React.FC = () => {
                 <div className="chat-message bot">
                   <div className="message-avatar"></div>
                   <div className="message-content">
-                    <p>Hello! I'm your AI Book Bot. I can help you discover new books, provide recommendations, answer questions about books you're reading, and more. How can I assist you today?</p>
+                    <p>Hello! I'm Bri, your Bibliophile Reader Interface. I can help you discover new books, provide recommendations, answer questions about books you're reading, and more. How can I assist you today?</p>
                     <div className="message-time">10:30 AM</div>
                   </div>
                 </div>
@@ -687,7 +687,7 @@ const Dashboard: React.FC = () => {
             onClick={() => setActiveFeature('bookbot')}
           >
             <span className="feature-icon bookbot-icon">🤖</span>
-            <span className="feature-label">AI Book Bot</span>
+            <span className="feature-label">Bri</span>
           </button>
           <button 
             className={`feature-btn ${activeFeature === 'writer' ? 'active' : ''}`}

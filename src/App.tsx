@@ -15,6 +15,8 @@ import Sidebar from './components/Sidebar';
 import ContextSidebar from './components/ContextSidebar';
 import DashboardHome from './components/DashboardHome';
 import Clubs from './components/Clubs';
+import BookBot from './components/BookBot';
+import ChallengesPage from './pages/ChallengesPage';
 
 const App: React.FC = () => {
   const [session, setSession] = useState<any>(null);
@@ -22,6 +24,7 @@ const App: React.FC = () => {
   const [activePage, setActivePage] = useState<string>('dashboard');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [contextSidebarOpen, setContextSidebarOpen] = useState<boolean>(false);
+  const [userBooks, setUserBooks] = useState<any[]>([]);
 
   useEffect(() => {
     // Check if we have a session
@@ -39,6 +42,15 @@ const App: React.FC = () => {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // Fetch user's books
+  useEffect(() => {
+    if (session) {
+      // This would be replaced with actual database fetch in a real app
+      // For now, we'll just set empty array that will be populated by the Library component
+      setUserBooks([]);
+    }
+  }, [session]);
 
   // Toggle mobile menu
   const toggleMobileMenu = () => {
@@ -69,6 +81,8 @@ const App: React.FC = () => {
         return <DashboardHome />;
       case 'books':
         return <Library />;
+      case 'challenges':
+        return <ChallengesPage books={userBooks} />;
       case 'community':
         return <Community />;
       case 'clubs':
@@ -78,8 +92,14 @@ const App: React.FC = () => {
       case 'bookbot':
         return (
           <div className="page-container">
-            <h1>AI Book Bot</h1>
-            <p>The AI Book Bot assistant will be displayed here.</p>
+            <h1>Bri - Bibliophile Reader Interface</h1>
+            <p>Get personalized book recommendations based on your reading history and preferences.</p>
+            <div className="book-bot-wrapper">
+              <BookBot 
+                books={userBooks}
+                apiKey={process.env.REACT_APP_GEMINI_API_KEY || 'AIzaSyDRjcMAyOJbYCm2QxvJAyRXuy1ftfp7Dxs'} 
+              />
+            </div>
           </div>
         );
       case 'writer':
@@ -106,7 +126,7 @@ const App: React.FC = () => {
   // Main application with navigation when authenticated
   const AuthenticatedApp = () => (
     <div className="app-container">
-      <Navbar />
+      <Navbar onToggleSidebar={() => console.log('Toggle sidebar')} />
       <div className="app-body">
         <Sidebar 
           activePage={activePage} 

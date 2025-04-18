@@ -1,0 +1,164 @@
+.leaderboard {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  width: 100%;
+}
+
+.leaderboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.leaderboard-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.leaderboard-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 5px 15px;
+  cursor: pointer;
+  color: #666;
+  font-weight: 500;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background-color: #4a6fa5;
+  color: white;
+}
+
+.leaderboard-timeframe {
+  margin-bottom: 15px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  padding: 5px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background-color: #f8f9fa;
+}
+
+.leaderboard-table {
+  width: 100%;
+}
+
+.leaderboard-headers {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr;
+  padding: 10px;
+  background-color: #f5f7f9;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.header.user {
+  text-align: left;
+}
+
+.leaderboard-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.leaderboard-entry {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr;
+  padding: 12px 10px;
+  border-radius: 6px;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.leaderboard-entry:hover {
+  background-color: #f8f9fa;
+}
+
+.leaderboard-entry.current-user {
+  background-color: #e9f5ff;
+}
+
+.entry-rank {
+  text-align: center;
+  font-weight: 500;
+  color: #555;
+  font-size: 1rem;
+}
+
+.entry-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  font-size: 1.2rem;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.friend-indicator {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.entry-books, .entry-score {
+  text-align: center;
+  font-weight: 500;
+  color: #333;
+}
+
+.entry-score {
+  color: #4a6fa5;
+}
+
+.no-entries {
+  padding: 30px;
+  text-align: center;
+  color: #666;
+}
+
+.leaderboard-footer {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.leaderboard-footer p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.info-icon {
+  font-size: 1rem;
+} 

@@ -731,4 +731,15 @@ body {
   .context-menu-toggle {
     display: flex;
   }
+}
+
+/* BookBot styling */
+.book-bot-wrapper {
+  margin-top: 30px;
+  max-width: 800px;
+  width: 100%;
+  height: 600px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
 } 

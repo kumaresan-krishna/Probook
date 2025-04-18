@@ -1,5 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Clubs.css';
+import {
+  Box, Flex, Grid, Heading, Text, Button, Input, IconButton,
+  InputGroup, InputLeftElement, Badge, Menu, MenuButton,
+  MenuList, MenuItem, Tab, Tabs, TabList, TabPanels,
+  TabPanel, SimpleGrid, Divider, useColorModeValue, useBreakpointValue,
+  Container, VStack, HStack, Tag, Avatar, AvatarGroup, Image,
+  useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader,
+  ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel,
+  Textarea
+} from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import {
+  MagnifyingGlass, Plus, UsersThree, BookOpen, BookmarkSimple,
+  CaretDown, ChatsCircle, Share, Microphone, Globe, Calendar,
+  FunnelSimple, Users, Books, Star, Trophy
+} from 'phosphor-react';
+
+const MotionBox = motion(Box);
+const MotionFlex = motion(Flex);
+const MotionGrid = motion(Grid);
 
 interface Club {
   id: number;

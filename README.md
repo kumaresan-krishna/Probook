@@ -1,4 +1,4 @@
-# Prebook - Registration Module
+# Bookle - Registration Module
 
 A fully functional registration module for a web application using React and Supabase.
 
